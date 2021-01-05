@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Knowledge</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Knowledge</value>
+    </caseValues>
+    <layouts>
+        <layout>FAA Knowledge Article layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>How To Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <quickActions>
+        <label><!-- Publish --></label>
+        <name>FAA_Publish</name>
+    </quickActions>
+    <recordTypes>
+        <description><!-- FAA Knowledge  Articles --></description>
+        <label><!-- FAA Articles --></label>
+        <name>FAA_Articles</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Knowledge --></label>
+        <name>Knowledge</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

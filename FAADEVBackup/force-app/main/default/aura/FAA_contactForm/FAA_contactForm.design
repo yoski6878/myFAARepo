@@ -1,0 +1,4 @@
+<design:component >
+    <design:attribute name="title" label="Title" description="Title of the form component." />
+    <design:attribute name="subTitle" label="Sub Title" description="Title of the form component." />
+</design:component>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>FAA_Rejection_Email</fullName>
+        <description>FAA Rejection Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>FAA_Initial_Submitter__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>FAA_UAS_Email_Templates/FAA_Knowledge_Rejection_HTML_Email_Template</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>FAA_Reset_Initial_Submitter</fullName>
+        <field>FAA_Initial_Submitter__c</field>
+        <name>Reset Initial Submitter</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Reset_Initial_Submitter</fullName>
+        <field>FAA_Initial_Submitter__c</field>
+        <name>Reset Initial Submitter</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_Locked_to_False</fullName>
+        <field>FAA_Submited_for_an_approval__c</field>
+        <literalValue>0</literalValue>
+        <name>Set Locked to False</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_Locked_to_True</fullName>
+        <field>FAA_Submited_for_an_approval__c</field>
+        <literalValue>1</literalValue>
+        <name>Set Locked to True</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <knowledgePublishes>
+        <fullName>FAA_UAS_Publish_Article</fullName>
+        <action>Publish</action>
+        <label>Publish Article</label>
+        <language>en_US</language>
+        <protected>false</protected>
+    </knowledgePublishes>
+</Workflow>

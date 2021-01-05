@@ -1,0 +1,74 @@
+<aura:component controller="FAA_ContactFormController" implements="force:hasRecordId,force:hasSObjectName,force:lightningQuickActionWithoutHeader">
+<lightning:quickActionAPI aura:id="quickActionAPI"/>    
+<aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+<aura:attribute name="value" type="String" default="now"/>
+<aura:attribute name="isDataCategoryMapped" type="Boolean"/>
+<aura:attribute name="loading" type="Boolean" default="false" />
+<aura:attribute name="scheduleddate" type="Date" />
+<aura:attribute name="flagAsNew" type="Date" default="false" />
+<aura:attribute name="articleTitle" type="String" />
+<aura:attribute name="todaysDate" type="Object" />
+
+<aura:attribute name="options" type="List" default="[
+    {'label': 'Publish Now', 'value': 'now'},
+    {'label': 'Schedule publication on:', 'value': 'schedule'}
+    ]"/>
+    
+<aura:html tag="style">
+    .slds-p-around–medium {
+        padding: 0rem !important;
+    }
+    .slds-modal__content{
+        overflow-y:hidden !important;
+        height:unset !important;
+        max-height:unset !important;
+    }
+    .cuf-content {
+        padding: 0 0rem !important;
+    }
+</aura:html>
+
+<aura:if isTrue="{!v.isDataCategoryMapped}">
+<div class="modal-header slds-modal__header slds-size_1-of-1">
+    <h4 class="title slds-text-heading_medium">Publish "{!v.articleTitle}"</h4>
+</div>
+
+<div class="slds-modal__content slds-p-top_x-small slds-var-p-around_x-small slds-size_1-of-1 slds-is-relative">
+    
+    <form class="slds-form--stacked slds-var-p-around_x-small">
+        <div class="slds-p-top_x-small slds-inline_icon_text slds-grid slds-inline_icon_text--warning"><lightning:icon iconName="utility:warning" alternativeText="Warning!" variant="warning"
+            title="warning" size="x-small" />
+            <span class="slds-p-left_x-small">Any assignment details will be removed</span>
+        </div>
+        <lightning:radioGroup name="radioGroup"
+                            options="{! v.options }"
+                            class="slds-p-top_x-small"
+                            onclick="{!c.handleRadioChange}"
+                            value="{! v.value }"
+                            type="radio"/>
+        <lightning:input required="{!v.value=='schedule'}" messageWhenValueMissing="Please enter a valid date." aura:id="schDate" messageWhenRangeUnderflow="Schedule this article for later than today." min="{!v.todaysDate}" value="{!v.scheduleddate}" disabled="{!v.value == 'now'}" type="date" /><br/>
+        
+        <div class="slds-inline_icon_text slds-grid slds-inline_icon_text--warning">
+            <lightning:input disabled="{!v.value=='schedule'}" checked="{!v.flagAsNew}"  type="checkbox" label="Flag as new version"/>
+            <lightning:helptext class="slds-p-left_x-small"
+            content="Select this option to select a new major version. The previous version is archived. Deselect this option to save a minor change as the same version without archiving the previous version"
+            />
+        </div>
+    </form>
+        <br/>
+   
+</div>
+
+<div class="modal-footer slds-p-top–-x-small slds-modal__footer slds-size_1-of-1">
+    <lightning:button type="submit" variant="Brand" class="slds-button" label="Publish" onclick="{!c.publishData}"/>
+    <lightning:button variant="Neutral" class="slds-button" label="Cancel" onclick="{!c.cancel}" />
+</div>
+<aura:set attribute="else">
+    <div style="color:red;">Please attach data category to the article before publishing.</div>
+</aura:set>
+</aura:if>
+
+<aura:if isTrue="{!v.loading}">
+    <lightning:spinner alternativeText="Loading" variant="inverse" />
+  </aura:if>
+</aura:component>

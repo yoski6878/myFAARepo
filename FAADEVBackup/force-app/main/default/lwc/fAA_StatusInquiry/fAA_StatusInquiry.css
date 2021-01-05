@@ -1,0 +1,16 @@
+.slds-text-heading_small{
+    width:100%;
+}
+.slds-text-heading_small{
+    text-decoration : underline ;
+    width:100%;
+}
+.float-container {
+    padding: 20px;
+}
+
+.float-child {
+    width: 10%;
+    float: left;
+    padding: 20px;
+}

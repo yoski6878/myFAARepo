@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>FAA_Case_sharing_rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>This Sharing rule will share all FAA Case records to Support analysts</description>
+        <label>FAA Case sharing rule</label>
+        <sharedTo>
+            <group>FAA_Support_Center_Analyst</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>FAA Inquiries</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingGuestRules>
+        <fullName>FAA_Guest_Sharing_rule</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>This gives FAA Guest users read Access to web and email tagged cases</description>
+        <label>FAA Guest Sharing rule</label>
+        <sharedTo>
+            <guestUser>faasupportcenter</guestUser>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>FAA Inquiries</value>
+        </criteriaItems>
+    </sharingGuestRules>
+</SharingRules>

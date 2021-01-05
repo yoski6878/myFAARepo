@@ -1,0 +1,44 @@
+.THIS .contactSupportButtonCss{
+    border-radius: 0px;
+    text-transform: var(--lwc-textTransform,none);
+    font-size: var(--lwc-fcFontSizeMedium,0.8125rem);
+    color: var(--lwc-colorTextBrandPrimary,#FFFFFF);
+    background-color: var(--lwc-colorBackgroundButtonBrand,rgb(15, 48, 98));
+    border-color: var(--lwc-buttonColorBorderBrandPrimary,rgb(15, 48, 98));
+    display: block;
+    border-width: 2px;
+    border-style: solid;
+    padding: 5px 24px;
+    min-width: 135px;
+    transition: all .2s;
+
+}
+.THIS .slds-textarea {
+    height:150px !important;
+}
+.THIS .slds-radio {  
+    display: inline !important;  
+} 
+.THIS .slds-text-heading_small{
+    width:100%;
+}
+.THIS .myBtn  {
+    width: 200px;
+}
+.THIS .strong-text {
+    font-weight: bold;
+}
+.THIS.c-container {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+                        
+.THIS .slds-text-heading_small{
+    color:black !important;  
+  /*font-weight: bolder;   */                    
+}                      
+                        
+.THIS .slds-form-element__label{
+   color:black !important;
+   font-weight: 500; 
+}

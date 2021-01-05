@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AutoResponseRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <autoResponseRule>
+        <fullName>FAA Case Auto Response</fullName>
+        <active>true</active>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>FAA Inquiries</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>Email</value>
+            </criteriaItems>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <senderEmail>faauasdev@outlook.com</senderEmail>
+            <senderName>No-reply@FAA.gov</senderName>
+            <template>FAA_UAS_Email_Templates/FAA_Auto_Response_email_to_case_HTML_Email_Template</template>
+        </ruleEntry>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>Web,Phone</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>FAA Inquiries</value>
+            </criteriaItems>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <senderEmail>faauasdev@outlook.com</senderEmail>
+            <senderName>FAA Support</senderName>
+            <template>FAA_UAS_Email_Templates/FAA_Auto_Response_HTML_Email_Template</template>
+        </ruleEntry>
+    </autoResponseRule>
+</AutoResponseRules>

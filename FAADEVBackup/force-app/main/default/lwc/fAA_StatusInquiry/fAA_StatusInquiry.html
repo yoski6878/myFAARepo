@@ -1,0 +1,26 @@
+<template>
+    <h1>
+        <span class="slds-align_absolute-center slds-page-header__title slds-truncate" >Lookup Your Inquiry Status</span>
+    </h1><br/>
+    <span class="slds-align_absolute-center slds-page-header__col-title slds-truncate"> 
+        <lightning-input message-when-value-missing="Please provide case number" onchange={handleFieldChange} name="caseNumber" required="true" variant="auto" placeholder="CS0000001" label="Case Number"></lightning-input>
+        <lightning-input message-when-value-missing="Please provide an email" onchange={handleFieldChange} name="contactEmail" type="email" required="true" class="slds-p-left_x-small" placeholder="test@abc.com" variant="auto" label="Email"></lightning-input>
+    </span><br/>
+    <lightning-button onclick={searchCaseRecord} icon-position="left" icon-name="utility:search" variant="brand" class="slds-align_absolute-center" label="Lookup Status"></lightning-button>
+    <template if:true={caseRecordFound}>
+        <div class="slds-align_absolute-center">
+        <lightning-card  class="slds-size_x-large slds-var-p-around_small slds-text-align_center">
+            <div style="font-weight: bolder;" class="slds-m-top--medium slds-text-align_center">
+                <div style="text-decoration: underline;font-weight: bolder;">Inquiry Status Details </div> <br/>
+                <div style="display:inline-block;"><div style="font-weight: bolder;display:inline-block;">Case Number:</div><lightning-formatted-text class="slds-p-left--small" value={caseRecordFound.CaseNumber} ></lightning-formatted-text> </div> <br/>
+                <div style="display:inline-block;"><div style="font-weight: bolder;display:inline-block;">Date Created:</div><lightning-formatted-date-time class="slds-p-left--small" value={caseRecordFound.CreatedDate}></lightning-formatted-date-time></div> <br/>
+                <div style="display:inline-block;"> <div style="font-weight: bolder;display:inline-block;">Status:</div> <lightning-formatted-text class="slds-p-left--small" value={caseRecordFound.Status} ></lightning-formatted-text> </div> <br/> <br/>
+                <div class="slds-var-p-around_small">If you have any concerns regarding case status, please contact 844-FLY-MY-UA.</div>
+            </div>
+        </lightning-card>
+       </div>
+    </template>
+    <template if:true={_showSpinner}>
+        <lightning-spinner alternativetext="Loading" variant="inverse" ></lightning-spinner>
+    </template>
+</template>

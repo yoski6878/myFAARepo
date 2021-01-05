@@ -1,0 +1,83 @@
+<aura:component controller="FAA_ContactFormController" implements="forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+  <aura:attribute name="title" type="String" />
+  <aura:attribute name="subTitle" type="String" />
+  <aura:attribute name="loading" type="Boolean" default="false" />
+  <aura:attribute name="caseNumber" type="String" default="" />
+  <aura:attribute name="newAccount" type="Account"
+        default="{ 'sobjectType': 'Account', 'FAA_Preferred_Method_of_Contact__pc': 'Email' }" /> <!-- default to empty record -->
+  <aura:attribute name="newCase" type="Case"
+        default="{ 'sobjectType': 'Case', 'Description': ''}" /> <!-- default to empty record -->
+  <aura:attribute name="options" type="List" default="[
+    {'label': 'Email', 'value': 'Email'},
+    {'label': 'Phone', 'value': 'Phone'}
+    ]"/>
+  <!--<aura:registerEvent name="appEvent" type="selfService:caseCreateFieldChange"/>--> 
+  <aura:attribute name="demographicPicklist" type="String[]" />  <!-- Picklist Values of Demographic Field -->
+  <aura:handler name="init" value="{!this}" action="{!c.doInit}" /> 
+
+  <div class="c-container">
+    <aura:if isTrue="{!v.caseNumber ==''}">
+      <div class="slds-truncate slds-align-middle slds-text-align_center slds-p-top--small">
+        <h1 class="slds-page-header__title">{!v.title}</h1>
+        <span class="subtitle">{!v.subTitle}</span>
+      </div> <br/> 
+      <lightning:messages />
+      <lightning:card class="slds-section-title--divider slds-text-align_center"  title="Contact Details">
+          <div class="strong-text slds-text-align_left slds-m-bottom--x-small">
+              <lightning:radioGroup name="methodOfContact"
+                              label="Preferred Contact Method"
+                              required="true"
+                              options="{! v.options }"
+                              style="display:inline-block !important; "
+                              value="{! v.newAccount.FAA_Preferred_Method_of_Contact__pc }"
+                              type="radio"/>
+              <div class="slds-grid slds-gutters slds-m-top--x-small">
+                <div class="slds-col ">
+                      <lightning:input messageWhenValueMissing="Please provide first name" aura:id="contactField" name="firstName" label="First Name"
+                      value="{!v.newAccount.FirstName}" required="true"    />
+                </div>
+                <div class="slds-col ">
+                      <lightning:input messageWhenValueMissing="Please provide last name" aura:id="contactField" name="lastname" label="Last Name"
+                      value="{!v.newAccount.LastName}" required="true"/>
+                </div>
+              </div> 
+              <div class="slds-grid slds-gutters slds-m-top--x-small">
+                <div class="slds-col ">               
+                      <lightning:input messageWhenValueMissing="Please provide an email" placeholder="test@abc.com" aura:id="contactField" type="email" name="email" label="Email"
+                      value="{!v.newAccount.PersonEmail}" required="true" />  
+                </div>  
+                <div class="slds-col  ">   
+                      <lightning:input aura:id="contactField" type="phone" name="phone" label="Phone Number"
+                      pattern="^(1?(-?\d{3})-?)?(\d{3})(-?\d{4})$"
+                      messageWhenPatternMismatch="The phone number must contain 7, 10, or 11 digits. Hyphens are optional."
+                      value="{!v.newAccount.Phone}" required="{!v.newAccount.FAA_Preferred_Method_of_Contact__c == 'Phone'}"/>
+                </div>
+                <div class="slds-col">
+                      <lightning:input aura:id="contactField" type="text" name="zipcode" label="Zip Code"  value="{!v.newAccount.PersonMailingPostalCode}"/>
+                </div>
+              </div>
+          </div>
+      </lightning:card>
+      <lightning:card class="slds-section-title--divider slds-text-align_center" title="Inquiry Details">
+          <div class="strong-text slds-text-align_left slds-form--stacked slds-m-bottom--x-small">
+              <lightning:select aura:id="caseField" value="{!v.newCase.FAA_Demographic__c}" label="Tell Us About Yourself">
+                <aura:iteration items="{!v.demographicPicklist}" var="val">
+                    <option value="{!val}"> {!val}</option>
+                </aura:iteration>
+              </lightning:select> 
+              <lightning:input messageWhenValueMissing="Please provide subject"  aura:id="caseField" required="true" type="text" name="Subject"  label="Subject" onchange="{!c.itemsChange}"  value="{!v.newCase.Subject}"/>
+              <lightning:textarea messageWhenValueMissing="Please provide some detail about your inquiry"  aura:id="caseField" placeholder="type here..." name="Description" required="true" onchange="{!c.itemsChange}"  type="textarea"  label="Your Inquiry"  value="{!v.newCase.Description}"/>
+              <span style="color:grey;">{!10000 - v.newCase.Description.length} characters remaining</span>
+          </div>
+      </lightning:card>
+      <lightning:button  onclick="{!c.submitNew}" variant="brand" class="myBtn slds-m-top_small slds-align_absolute-center" label="Submit" />
+      <aura:set attribute="else">
+        <c:fAA_ThankYou caseNumber="{!v.caseNumber}"></c:fAA_ThankYou>
+      </aura:set>
+    </aura:if>
+  </div>
+  <div  class="slds-m-bottom_large"> </div> 
+  <aura:if isTrue="{!v.loading}">
+    <lightning:spinner alternativeText="Loading" variant="inverse" />
+  </aura:if>
+</aura:component>

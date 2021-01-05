@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataCategoryGroup xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <dataCategory>
+        <dataCategory>
+            <label>Airspace Authorizations</label>
+            <name>Airspace_Authorizations</name>
+        </dataCategory>
+        <dataCategory>
+            <label>Drone Registration</label>
+            <name>Drone_Registration</name>
+        </dataCategory>
+        <dataCategory>
+            <label>Part 107 Requirements</label>
+            <name>Part_107_Requirements</name>
+        </dataCategory>
+        <dataCategory>
+            <label>Part 107 Waivers</label>
+            <name>Part_107_Waivers</name>
+        </dataCategory>
+        <dataCategory>
+            <label>Recreation Flyers Exemption</label>
+            <name>Recreation_Flyers_Exemption</name>
+        </dataCategory>
+        <dataCategory>
+            <label>General</label>
+            <name>General</name>
+        </dataCategory>
+        <label>All</label>
+        <name>All</name>
+    </dataCategory>
+    <label>FAA Topics</label>
+    <objectUsage>
+        <object>KnowledgeArticleVersion</object>
+    </objectUsage>
+</DataCategoryGroup>
